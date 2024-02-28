@@ -20,50 +20,43 @@
                 </div>
             </div>
         </xpath>
-<!--        to replace the print head name-->
+<!--        To replace the print head name-->
         <xpath expr="//table//tr/th[@name='th_priceunit']" position="replace">
-            <th name="th_priceunit" class="text-end">
+            <th name="th_priceunit" class="text-center">
                 <span>Price</span>
             </th>
         </xpath>
-<!--        to remoce the field head-->
-
-<!--        <xpath expr="//t[@t-foreach='lines_to_report']//td[@name='td_quantity']" position="attributes">-->
-<!--             <attribute name="invisible">1</attribute>-->
-<!--         </xpath>-->
-
-
-
-        <xpath expr="//table//tr/th['th_description']" position="after">
-            <th>
-                <strong>Pay. Type</strong>
+        <xpath expr="//table//tr/th[@name='th_subtotal']" position="replace">
+            <th name="th_subtotal" class="text-center">
+                <span>Amount</span>
             </th>
         </xpath>
-        <xpath expr="//t[@t-foreach='lines_to_report']//td[@name='td_name']" position="after">
-<!--            <td name="td_name"><span style="display:block;width:200px;word-wrap:break-word;" t-esc="line.name"/></td>-->
-            <td style="height:20px !important;width:20px !important;">
-                <span t-field="line.payment_types"/>
+
+        <xpath expr="//t[@t-foreach='lines_to_report']//td[@name='td_subtotal']" position="replace">
+            <td name="td_subtotal" class="text-center o_price_total">
+                <span t-field="line.price_subtotal"/>
             </td>
         </xpath>
-        <xpath expr="//table//tr/th[1]" position="after">
-            <th>
-                <strong>Re. Date</strong>
-            </th>
+
+
+        <xpath expr="//table//tr/th[1]" position="after"><!--Give New Print Head-->
+             <th name="th_receive_datetime" class="text-start">Received Date</th>
         </xpath>
-        <xpath expr="//t[@t-foreach='lines_to_report']//td[@name='td_name']" position="after">
-<!--            <td name="td_name"><span style="display:block;width:200px;word-wrap:break-word;" t-esc="line.name"/></td>-->
-            <td style="height:20px !important;width:20px !important;">
+        <xpath expr="//t[@t-foreach='lines_to_report']//td[@name='td_name']" position="after"><!--Add New Field Value-->
+            <td name="td_receive_datetime" class="text-start">
                 <span t-field="line.receive_datetime"/>
             </td>
         </xpath>
         <!-- Find the th_quantity field in the header and remove it -->
         <xpath expr="//th[@name='th_quantity']" position="replace">
-            <!-- This will effectively remove the Quantity column from the header -->
+           <th name="th_payment_types" class="text-start">Payment Types</th>
         </xpath>
 
         <!-- Find the td_quantity field in the body and remove it -->
         <xpath expr="//td[@name='td_quantity']" position="replace">
-            <!-- This will effectively remove the Quantity column from the body -->
+          <td name="td_payment_types" class="text-start">
+                <span t-field="line.payment_types"/>
+            </td>
         </xpath>
         <!-- Find the th_quantity field in the header and remove it -->
         <xpath expr="//th[@name='th_taxes']" position="replace">

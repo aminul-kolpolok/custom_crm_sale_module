@@ -22,7 +22,7 @@
 				# 'wizard/import_employee_view.xml',
 				'views/custom_inherit_sale_order.xml',
 				'report/custom_sale_quotation_print_view.xml',
-				'report/custom_sale_report_order_templates.xml',
+				# 'report/custom_sale_report_order_templates.xml',
 			],
 	'demo': [],
 	'qweb': [],
