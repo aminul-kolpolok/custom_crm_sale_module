@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_report_saleorder_inheriteds" model="ir.actions.report">
+        <field name="name">Service Quotation</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sale.report_saleorder</field>
+        <field name="report_file">sale.report_saleorder</field>
+        <field name="print_report_name">(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="_custom_sale_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@class='row mt-4 mb-4']" position="after">
+            <div class="row mt-4 mb-4" id="test_inherit">
+                <div>
+                    <strong>Service Note:</strong>
+                    <p class="m-0" t-field="doc.service_note"/>
+                </div>
+            </div>
+        </xpath>
+<!--        to replace the print head name-->
+        <xpath expr="//table//tr/th[@name='th_priceunit']" position="replace">
+            <th name="th_priceunit" class="text-end">
+                <span>Price</span>
+            </th>
+        </xpath>
+<!--        to remoce the field head-->
+
+<!--        <xpath expr="//t[@t-foreach='lines_to_report']//td[@name='td_quantity']" position="attributes">-->
+<!--             <attribute name="invisible">1</attribute>-->
+<!--         </xpath>-->
+
+
+
+        <xpath expr="//table//tr/th['th_description']" position="after">
+            <th>
+                <strong>Pay. Type</strong>
+            </th>
+        </xpath>
+        <xpath expr="//t[@t-foreach='lines_to_report']//td[@name='td_name']" position="after">
+<!--            <td name="td_name"><span style="display:block;width:200px;word-wrap:break-word;" t-esc="line.name"/></td>-->
+            <td style="height:20px !important;width:20px !important;">
+                <span t-field="line.payment_types"/>
+            </td>
+        </xpath>
+        <xpath expr="//table//tr/th[1]" position="after">
+            <th>
+                <strong>Re. Date</strong>
+            </th>
+        </xpath>
+        <xpath expr="//t[@t-foreach='lines_to_report']//td[@name='td_name']" position="after">
+<!--            <td name="td_name"><span style="display:block;width:200px;word-wrap:break-word;" t-esc="line.name"/></td>-->
+            <td style="height:20px !important;width:20px !important;">
+                <span t-field="line.receive_datetime"/>
+            </td>
+        </xpath>
+        <!-- Find the th_quantity field in the header and remove it -->
+        <xpath expr="//th[@name='th_quantity']" position="replace">
+            <!-- This will effectively remove the Quantity column from the header -->
+        </xpath>
+
+        <!-- Find the td_quantity field in the body and remove it -->
+        <xpath expr="//td[@name='td_quantity']" position="replace">
+            <!-- This will effectively remove the Quantity column from the body -->
+        </xpath>
+        <!-- Find the th_quantity field in the header and remove it -->
+        <xpath expr="//th[@name='th_taxes']" position="replace">
+            <!-- This will effectively remove the Quantity column from the header -->
+        </xpath>
+
+        <!-- Find the td_quantity field in the body and remove it -->
+        <xpath expr="//td[@name='td_taxes']" position="replace">
+            <!-- This will effectively remove the Quantity column from the body -->
+        </xpath>
+
+
+    </template>
+
+
+
+</odoo>

@@ -1,0 +1,34 @@
+<odoo>
+    <record id="custom_sale_order_form_inherited" model="ir.ui.view">
+            <field name="name">sale.order.form.inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+<!--            <field name="priority" eval="8"/>-->
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="service_note"/>
+                </xpath>
+
+<!--                One2many field added-->
+<!--                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">-->
+<!--                    <field name="sl_no"/>-->
+<!--                </xpath>-->
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
+                    <attribute name="string" >Product/Services</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="string" >Price</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                    <field name="receive_datetime"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+                    <field name="payment_types"/>
+                </xpath>
+            </field>
+    </record>
+
+</odoo>
