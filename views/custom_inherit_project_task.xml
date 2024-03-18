@@ -1,0 +1,35 @@
+<odoo>
+    <record id="custom_project_task_form_inherited" model="ir.ui.view">
+            <field name="name">project.task.form.inherited</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_ids']" position="after">
+                    <field name="reporter"/>
+                </xpath>
+
+<!--                One2many field added-->
+                <xpath expr="//page[@name='description_page']" position="after">
+                    <page name="emp_comments" string="Task Comments">
+                       <field name="emp_comments" type="html" options="{'collaborative': true, 'resizable': false}" placeholder="Task Comments of the project..."/>
+                    </page>
+                </xpath>
+<!--                <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">-->
+<!--                    <attribute name="string" >Product/Services</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">-->
+<!--                    <attribute name="string" >Price</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">-->
+<!--                    <field name="receive_datetime"/>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="before">-->
+<!--                    <field name="payment_types"/>-->
+<!--                </xpath>-->
+            </field>
+    </record>
+
+</odoo>

@@ -16,11 +16,12 @@
 	"website" : "http://kolpoloktechnologies.com",
 	"price": 00,
 	"currency": 'BDT',
-	'depends': ['base','sale'],
+	'depends': ['base','sale','project'],
 	'data': [
 				'security/ir.model.access.csv',
 				# 'wizard/import_employee_view.xml',
 				'views/custom_inherit_sale_order.xml',
+				'views/custom_inherit_project_task.xml',
 				'report/custom_sale_quotation_print_view.xml',
 				# 'report/custom_sale_report_order_templates.xml',
 			],
